@@ -1,0 +1,42 @@
+{
+	"name": "cdif",
+	"private": true,
+	"publisher": "mkps",
+	"displayName": "cDIF",
+	"description": "cDIF language support",
+	"version": "0.1.0",
+	"license": "MIT",
+	"icon": "res/icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mkacct/vscode-cdif.git"
+	},
+	"bugs": {
+		"url": "https://github.com/mkacct/vscode-cdif/issues"
+	},
+	"engines": {"vscode": "^1.98.0"},
+	"categories": ["Programming Languages", "Snippets"],
+	"contributes": {
+		"languages": [{
+			"id": "cdif",
+			"aliases": ["cDIF", "cdif"],
+			"extensions": [".cdif"],
+			"configuration": "./language-configuration.json",
+			"icon": {
+				"light": "res/cdif-seti.svg",
+				"dark": "res/cdif-seti.svg"
+			}
+		}],
+		"grammars": [{
+			"language": "cdif",
+			"scopeName": "source.cdif",
+			"path": "./syntaxes/cdif.tmLanguage.json"
+		}],
+		"snippets": [
+			{
+				"language": "cdif",
+				"path": "./snippets.json"
+			}
+		]
+	}
+}

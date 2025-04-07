@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"snippets.json": "snippets"
+	},
+	"material-icon-theme.files.associations": {
+		"snippets.json": "vscode"
+	},
+	"material-icon-theme.folders.associations": {
+		"res": "resource",
+		"src": "src",
+		"syntaxes": "syntax"
+	}
+}

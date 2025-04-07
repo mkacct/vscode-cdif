@@ -1,0 +1,287 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "cDIF",
+	"scopeName": "source.cdif",
+	"patterns": [
+		{"include": "#meta"},
+		{"include": "#value"},
+		{
+			"name": "punctuation.terminator.value.root.cdif",
+			"match": ";"
+		}
+	],
+	"repository": {
+		"meta": {
+			"patterns": [
+				{"include": "#directive"},
+				{"include": "#comment"}
+			]
+		},
+		"directive": {
+			"name": "meta.directive.cdif",
+			"match": "^\\s*((#)\\s*\\S*)\\s*(?:|(.*))$",
+			"captures": {
+				"1": {"name": "keyword.control.directive.cdif"},
+				"2": {"name": "punctuation.definition.directive.cdif"},
+				"3": {"name": "entity.other.attribute-name.directive.cdif"}
+			}
+		},
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.cbnf",
+					"match": "(//).*$",
+					"captures": {"1": {"name": "punctuation.definition.comment.cbnf"}}
+				},
+				{
+					"name": "comment.block.cbnf",
+					"begin": "/\\*",
+					"end": "\\*/",
+					"captures": {"0": {"name": "punctuation.definition.comment.cbnf"}}
+				}
+			]
+		},
+		"value": {
+			"patterns": [
+				{"include": "#constant"},
+				{"include": "#component-ref"},
+				{"include": "#number"},
+				{"include": "#char"},
+				{"include": "#string"},
+				{"include": "#collection"},
+				{"include": "#object"},
+				{"include": "#type-identifier"}
+			]
+		},
+		"constant": {
+			"name": "constant.language.cdif",
+			"match": "(?<![\\p{L}\\d\\$_])(?:true|false|null)(?![\\p{L}\\d\\$_])"
+		},
+		"component-ref": {
+			"name": "variable.other.component.cdif",
+			"match": "(?<![\\p{L}\\d\\$_])(\\$)[\\p{L}_][\\p{L}\\d\\$_]*(?![\\p{L}\\d\\$_])",
+			"captures": {"1": {"name": "keyword.control.flow.component.cdif punctuation.definition.component.cdif"}}
+		},
+		"number": {
+			"patterns": [
+				{
+					"name": "constant.numeric.cdif",
+					"match": "[+-]?(?:((?<int>\\d(?:_?\\d)*))?\\.(?(1)\\g<int>?|\\g<int>))(?:[eE][+-]?\\g<int>)?"
+				},
+				{
+					"name": "constant.numeric.cdif",
+					"match": "[+-]?(?:0[bB][01](?:_?[01])*|0[oO][0-7](?:_?[0-7])*|0[xX][\\da-fA-F](?:_?[\\da-fA-F])*|\\d(?:_?\\d)*)"
+				},
+				{
+					"name": "constant.numeric.cdif",
+					"match": "[+-]?infinity(?![\\p{L}\\d\\$_])"
+				}
+			]
+		},
+		"escape-seq": {
+			"patterns": [
+				{
+					"name": "constant.character.escape.cdif",
+					"match": "\\\\(?:[bfnrtv'\"\\\\\\/]|u[\\da-fA-F]{4}|U[\\da-fA-F]{8})"
+				},
+				{
+					"name": "invalid.illegal.unrecognized-string-escape.cdif",
+					"match": "\\\\."
+				}
+			]
+		},
+		"multiline-escape-seq": {
+			"patterns": [
+				{
+					"name": "constant.language.cdif",
+					"match": "\\\\\\s*\\n"
+				},
+				{"include": "#escape-seq"}
+			]
+		},
+		"char": {
+			"name": "string.quoted.single.cdif",
+			"begin": "'",
+			"end": "'",
+			"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+			"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}},
+			"patterns": [
+				{"include": "#escape-seq"}
+			]
+		},
+		"string": {
+			"patterns": [
+				{
+					"name": "string.quoted.triple.cdif",
+					"begin": "\"\"\"\"\"+",
+					"end": "\"\"\"\"\"+",
+					"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+					"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}},
+					"patterns": [
+						{"include": "#multiline-escape-seq"}
+					]
+				},
+				{
+					"name": "string.quoted.other.cdif",
+					"begin": "`````+",
+					"end": "`````+",
+					"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+					"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}}
+				},
+				{
+					"name": "string.quoted.triple.cdif",
+					"begin": "\"\"\"\"",
+					"end": "\"\"\"\"",
+					"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+					"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}},
+					"patterns": [
+						{"include": "#multiline-escape-seq"}
+					]
+				},
+				{
+					"name": "string.quoted.other.cdif",
+					"begin": "````",
+					"end": "````",
+					"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+					"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}}
+				},
+				{
+					"name": "string.quoted.triple.cdif",
+					"begin": "\"\"\"",
+					"end": "\"\"\"",
+					"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+					"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}},
+					"patterns": [
+						{"include": "#multiline-escape-seq"}
+					]
+				},
+				{
+					"name": "string.quoted.other.cdif",
+					"begin": "```",
+					"end": "```",
+					"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+					"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}}
+				},
+				{
+					"name": "string.quoted.double.cdif",
+					"begin": "\"",
+					"end": "\"",
+					"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+					"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}},
+					"patterns": [
+						{"include": "#escape-seq"}
+					]
+				},
+				{
+					"name": "string.quoted.other.cdif",
+					"begin": "`",
+					"end": "`",
+					"beginCaptures": {"0": {"name": "punctuation.definition.string.begin.cdif"}},
+					"endCaptures": {"0": {"name": "punctuation.definition.string.end.cdif"}}
+				}
+			]
+		},
+		"type-identifier": {
+			"patterns": [
+				{
+					"name": "invalid.illegal.reserved-word.cdif",
+					"match": "(?<![\\p{L}\\d\\$_])(?:infinity|true|false|null|undef)(?![\\p{L}\\d\\$_])"
+				},
+				{
+					"name": "support.function.cdif",
+					"match": "(?<![\\p{L}\\d\\$_])[\\p{Ll}_][\\p{L}\\d\\$_]*(?![\\p{L}\\d\\$_])"
+				},
+				{
+					"name": "support.type.cdif",
+					"match": "(?<![\\p{L}\\d\\$_])[\\p{L}_][\\p{L}\\d\\$_]*(?![\\p{L}\\d\\$_])"
+				}
+			]
+		},
+		"object": {
+			"name": "meta.structure.object.cdif",
+			"begin": "\\{",
+			"end": "\\}",
+			"beginCaptures": {"0": {"name": "punctuation.definition.object.begin.cdif"}},
+			"endCaptures": {"0": {"name": "punctuation.definition.object.end.cdif"}},
+			"patterns": [
+				{"include": "#meta"},
+				{
+					"name": "entity.name.tag.cdif",
+					"match": "(?<![\\p{L}\\d\\$_])[\\p{L}_][\\p{L}\\d\\$_]*(?![\\p{L}\\d\\$_])"
+				},
+				{
+					"name": "meta.structure.object.spread.cdif",
+					"begin": "\\.\\.\\.",
+					"end": "([,;])|(?=\\})",
+					"beginCaptures": {"0": {"name": "keyword.operator.spread.cdif"}},
+					"endCaptures": {"1": {"name": "punctuation.separator.object.pair.cdif"}},
+					"patterns": [
+						{"include": "#meta"},
+						{"include": "#component-ref"},
+						{
+							"name": "invalid.illegal.expected-object-separator.cdif",
+							"match": "[^\\s,;]"
+						}
+					]
+				},
+				{
+					"name": "meta.structure.object.value.cdif",
+					"begin": ":",
+					"end": "([,;])|(?=\\})",
+					"beginCaptures": {"0": {"name": "punctuation.separator.object.key-value.cdif"}},
+					"endCaptures": {"1": {"name": "punctuation.separator.object.pair.cdif"}},
+					"patterns": [
+						{"include": "#meta"},
+						{
+							"name": "keyword.control.undef.cdif",
+							"match": "(?<![\\p{L}\\d\\$_])undef(?![\\p{L}\\d\\$_])"
+						},
+						{"include": "#value"},
+						{
+							"name": "invalid.illegal.expected-object-separator.cdif",
+							"match": "[^\\s,;]"
+						}
+					]
+				},
+				{
+					"name": "invalid.illegal.expected-object-separator.cdif",
+					"match": "[^\\s\\}]"
+				}
+			]
+		},
+		"collection": {
+			"name": "meta.structure.collection.cdif",
+			"begin": "\\[",
+			"end": "\\]",
+			"beginCaptures": {"0": {"name": "punctuation.definition.collection.begin.cdif"}},
+			"endCaptures": {"0": {"name": "punctuation.definition.collection.end.cdif"}},
+			"patterns": [
+				{"include": "#meta"},
+				{
+					"name": "meta.structure.collection.spread.cdif",
+					"begin": "\\.\\.\\.",
+					"end": "([,;])|(?=\\])",
+					"beginCaptures": {"0": {"name": "keyword.operator.spread.cdif"}},
+					"endCaptures": {"1": {"name": "punctuation.separator.collection.cdif"}},
+					"patterns": [
+						{"include": "#meta"},
+						{"include": "#component-ref"},
+						{
+							"name": "invalid.illegal.expected-collection-separator.cdif",
+							"match": "[^\\s,;]"
+						}
+					]
+				},
+				{"include": "#value"},
+				{
+					"name": "punctuation.separator.collection.cdif",
+					"match": "[,;]"
+				},
+				{
+					"name": "invalid.illegal.expected-collection-separator.cdif",
+					"match": "[^\\s\\]]"
+				}
+			]
+		}
+	}
+}

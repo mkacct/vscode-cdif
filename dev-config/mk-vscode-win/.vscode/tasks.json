@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"problemMatcher": [],
+	"presentation": {
+		"echo": false,
+		"panel": "dedicated",
+		"clear": true,
+		"reveal": "silent",
+		"close": true
+	},
+	"tasks": [
+		{
+			"label": "npm install",
+			"runOptions": {"runOn": "folderOpen"},
+			"type": "shell",
+			"command": "npm install"
+		}
+	]
+}

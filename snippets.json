@@ -1,0 +1,20 @@
+{
+	"cDIF directive": {
+		"prefix": "cdif",
+		"body": [
+			"# cDIF ${1:0.1}",
+			"$0"
+		],
+		"description": "cDIF version declaration",
+		"isFileTemplate": true
+	},
+	"Components section": {
+		"prefix": "components",
+		"body": [
+			"# components",
+			"{",
+			"\t$0",
+			"};"
+		]
+	}
+}

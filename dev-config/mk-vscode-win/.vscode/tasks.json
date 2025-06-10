@@ -14,6 +14,18 @@
 			"runOptions": {"runOn": "folderOpen"},
 			"type": "shell",
 			"command": "npm install"
+		},
+		{
+			"label": "vsce package",
+			"group": "build",
+			"dependsOn": [
+				"npm install"
+			],
+			"type": "shell",
+			"command": "vsce package",
+			"presentation": {
+				"reveal": "always",
+			}
 		}
 	]
 }

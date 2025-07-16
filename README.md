@@ -2,7 +2,7 @@
 
 This extension provides support (syntax highlighting and snippets) for the [cDIF](https://github.com/mkacct/cdif/blob/main/spec.md) language. cDIF is a textual data interchange format for representing configurations and other structured data.
 
-This extension is up to date with cDIF version 0.1.
+This extension is up to date with cDIF version 1.0.
 
 ## Icons
 

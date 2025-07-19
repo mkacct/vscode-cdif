@@ -2,7 +2,7 @@
 	"cDIF directive": {
 		"prefix": "cdif",
 		"body": [
-			"# cDIF ${1:1.0}",
+			"# cDIF ${1:1.0.1}",
 			"$0"
 		],
 		"description": "cDIF version declaration",

@@ -1,15 +1,16 @@
 {
 	"cDIF directive": {
 		"prefix": "cdif",
+		"description": "cDIF version declaration",
+		"isFileTemplate": true,
 		"body": [
 			"# cDIF ${1:1.0.1}",
 			"$0"
-		],
-		"description": "cDIF version declaration",
-		"isFileTemplate": true
+		]
 	},
 	"Components section": {
 		"prefix": "components",
+		"description": "Components section",
 		"body": [
 			"# components",
 			"{",

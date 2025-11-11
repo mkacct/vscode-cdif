@@ -4,7 +4,7 @@
 	"publisher": "mkps",
 	"displayName": "cDIF",
 	"description": "cDIF language support",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"license": "MIT",
 	"icon": "res/icon.png",
 	"repository": {
@@ -23,8 +23,8 @@
 			"extensions": [".cdif"],
 			"configuration": "./language-configuration.json",
 			"icon": {
-				"light": "res/cdif-seti.svg",
-				"dark": "res/cdif-seti.svg"
+				"dark": "res/cdif-seti-dark.svg",
+				"light": "res/cdif-seti-light.svg"
 			}
 		}],
 		"grammars": [{
